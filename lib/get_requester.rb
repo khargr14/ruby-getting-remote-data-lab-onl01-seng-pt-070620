@@ -1,35 +1,25 @@
 # Write your code here
 
-require 'net/http'
 require 'open-uri'
+require 'net/http'
 require 'json'
- 
+require 'pry'
+
+
 class GetRequester
-  
- url = "https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json"
-  
-  def get_requester
-    uri = URI.parse(URL)
-    response = Net::HTTP.get_response(uri)
-    response.body
-  
-end
-  
-  
-  
-end
+    attr_reader :url
 
+    def initialize(url)
+        @url = url
+    end
 
-#URL = "http://data.cityofnewyork.us/resource/uvks-tn5n.json"
-# 
-#  def get_programs
-#    uri = URI.parse(URL)
-#    response = Net::HTTP.get_response(uri)
-#    response.body
-#  end
- 
+    def get_response_body
+        uri = URI.parse(url)
+        response = Net::HTTP.get_response(uri)
+        response.body
+    end
+
+    def parse_json
+        yeet = JSON.parse(self.get_response_body)
+    end
 end
- 
-programs = GetPrograms.new.get_programs
-puts programs
- 
